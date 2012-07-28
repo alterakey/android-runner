@@ -4,6 +4,7 @@ Android Runner
 (C) 2012 Takahiro Yoshimura <altakey@gmail.com>
 
 This is a template to enable ant tasks to run apps and tests...
+Supporting Android SDK r20 and later on *nix-alike OSes (e.g. Mac OS X 10.6/10.7/10.8.)
 
 
 0. INSTALLATION
