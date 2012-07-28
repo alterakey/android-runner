@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<project name="runner">
+  <!-- quick check on runner.dir -->
+  <fail
+          message="runner.dir is missing. Make sure to inject it through an env var"
+          unless="runner.dir"
+  />
+
+  <import file="${runner.dir}/runner.xml" />
+  <!-- <import file="${runner.dir}/test.xml" /> -->
+</project>

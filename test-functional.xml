@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="android_test_runner_rules" default="run">
+  <target name="test-func" depends="test-func-quick" />
+  <target name="test-func-quick">
+    <subant>
+      <fileset dir="${runner.test.functional}" includes="build.xml" />
+      <target name="debug" />
+      <target name="uninstall" />
+      <target name="install" />
+      <target name="test" />
+    </subant>
+  </target>
+  <target name="test-func-clean" depends="clean">
+    <subant>
+      <fileset dir="${runner.test.functional}" includes="build.xml" />
+      <target name="clean" />
+      <target name="debug" />
+      <target name="uninstall" />
+      <target name="install" />
+      <target name="test" />
+    </subant>
+  </target>
+</project>
