@@ -7,5 +7,6 @@
   />
 
   <import file="${runner.dir}/runner.xml" />
-  <!-- <import file="${runner.dir}/test.xml" /> -->
+  <!-- <import file="${runner.dir}/test-unit.xml" /> -->
+  <!-- <import file="${runner.dir}/test-functional.xml" /> -->
 </project>
