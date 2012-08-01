@@ -10,7 +10,7 @@ Supporting Android SDK r20 and later on *nix-alike OSes (e.g. Mac OS X 10.6/10.7
 0. INSTALLATION
 -----------------
 
-$ git clone git@github.com:taky/android-runner.git
+$ git clone git://github.com/taky/android-runner.git
 $ mv android-runner /usr/local/android-runner
 
 
