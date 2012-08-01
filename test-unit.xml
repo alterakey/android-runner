@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="android_test_runner_rules" default="test-unit">
-  <target name="test-unit" depends="test-unit-quick" />
+  <target name="test-unit" depends="test-unit-normal" />
   <target name="test-unit-code-gen">
   </target>
-  <target name="test-unit-quick" depends="test-unit-code-gen">
+  <target name="test-unit-quick">
     <subant>
       <fileset dir="${runner.test.unit}" includes="build.xml" />
       <target name="test" />
     </subant>
   </target>
-  <target name="test-unit-clean" depends="clean, test-unit-code-gen">
+  <target name="test-unit-normal">
     <subant>
       <fileset dir="${runner.test.unit}" includes="build.xml" />
       <target name="clean" />
       <target name="test" />
     </subant>
+  </target>
+  <target name="test-unit-clean" depends="clean, test-unit-code-gen, test-unit-normal">
   </target>
 </project>
