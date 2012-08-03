@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="runner-setup">
+  <!-- Half-baked pre build setup from Android SDK r20 -->
+  <target name="sdk-build-setup">
+    <!-- read the previous build mode -->
+    <property file="${out.build.prop.file}" />
+    <!-- if empty the props won't be set, meaning it's a new build.
+	 To force a build, set the prop to empty values. -->
+    <property name="build.last.target" value="" />
+    <property name="build.last.is.instrumented" value="" />
+    <property name="build.last.is.packaging.debug" value="" />
+    <property name="build.last.is.signing.debug" value="" />
+
+    <echo level="info">Resolving Build Target for ${ant.project.name}...</echo>
+    <!-- load project properties, resolve Android target, library dependencies
+	 and set some properties with the results.
+	 All property names are passed as parameters ending in -Out -->
+    <gettarget
+	androidJarFileOut="project.target.android.jar"
+	androidAidlFileOut="project.target.framework.aidl"
+	bootClassPathOut="project.target.class.path"
+	targetApiOut="project.target.apilevel"
+	minSdkVersionOut="project.minSdkVersion" />
+
+    <!-- Value of the hasCode attribute (Application node) extracted from manifest file -->
+    <xpath input="${manifest.abs.file}" expression="/manifest/application/@android:hasCode"
+	   output="manifest.hasCode" default="true"/>
+
+    <echo level="info">----------</echo>
+    <echo level="info">Creating output directories if needed...</echo>
+    <mkdir dir="${resource.absolute.dir}" />
+    <mkdir dir="${jar.libs.absolute.dir}" />
+    <mkdir dir="${out.absolute.dir}" />
+    <mkdir dir="${out.res.absolute.dir}" />
+    <do-only-if-manifest-hasCode>
+      <mkdir dir="${gen.absolute.dir}" />
+      <mkdir dir="${out.classes.absolute.dir}" />
+    </do-only-if-manifest-hasCode>
+
+
+    <echo level="info">----------</echo>
+    <echo level="info">Resolving Dependencies for ${ant.project.name}...</echo>
+    <dependency
+	libraryFolderPathOut="project.library.folder.path"
+	libraryPackagesOut="project.library.packages"
+	libraryManifestFilePathOut="project.library.manifest.file.path"
+	libraryResFolderPathOut="project.library.res.folder.path"
+	libraryBinAidlFolderPathOut="project.library.bin.aidl.folder.path"
+	libraryNativeFolderPathOut="project.library.native.folder.path"
+	jarLibraryPathOut="project.all.jars.path"
+	targetApi="${project.target.apilevel}"
+	verbose="${verbose}" />
+  </target>
+
+  <!-- Half-baked package regenerator -->
+  <!-- TBD: dependency handling -->
+  <target name="regenerate" depends="sdk-build-setup">
+    <property name="renderscript.opt.level" value="O0" />
+
+    <!-- always merge manifest -->
+    <mergemanifest
+	appManifest="${manifest.abs.file}"
+	outManifest="${out.manifest.abs.file}"
+	enabled="${manifestmerger.enabled}">
+      <library refid="project.library.manifest.file.path" />
+    </mergemanifest>
+
+    <do-only-if-manifest-hasCode
+	elseText="hasCode = false. Skipping aidl/renderscript/R.java">
+      <echo level="info">Handling aidl files...</echo>
+      <aidl executable="${aidl}"
+	    framework="${project.target.framework.aidl}"
+	    libraryBinAidlFolderPathRefid="project.library.bin.aidl.folder.path"
+	    genFolder="${gen.absolute.dir}"
+	    aidlOutFolder="${out.aidl.absolute.dir}">
+	<source path="${source.absolute.dir}"/>
+      </aidl>
+
+      <!-- renderscript generates resources so it must be called before aapt -->
+      <echo level="info">----------</echo>
+      <echo level="info">Handling RenderScript files...</echo>
+      <renderscript executable="${renderscript}"
+                    includePath="${android.renderscript.include.path}"
+                    genFolder="${gen.absolute.dir}"
+                    resFolder="${out.res.absolute.dir}/raw"
+                    targetApi="${project.minSdkVersion}"
+                    optLevel="${renderscript.opt.level}"
+                    buildType="${build.is.packaging.debug}"
+                    previousBuildType="${build.last.is.packaging.debug}">
+	<source path="${source.absolute.dir}"/>
+      </renderscript>
+
+      <echo level="info">----------</echo>
+      <echo level="info">Handling Resources...</echo>
+      <aapt executable="${aapt}"
+	    command="package"
+	    verbose="${verbose}"
+	    manifest="${out.manifest.abs.file}"
+	    androidjar="${project.target.android.jar}"
+	    rfolder="${gen.absolute.dir}"
+	    nonConstantId="${android.library}"
+	    libraryResFolderPathRefid="project.library.res.folder.path"
+	    libraryPackagesRefid="project.library.packages"
+	    ignoreAssets="${aapt.ignore.assets}"
+	    proguardFile="${out.absolute.dir}/proguard.txt">
+	<res path="${out.res.absolute.dir}" />
+	<res path="${resource.absolute.dir}" />
+      </aapt>
+    </do-only-if-manifest-hasCode>
+  </target>
+</project>
