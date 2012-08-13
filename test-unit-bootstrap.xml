@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="android-runner-unit-bootstrap">
+  <path id="runner.test.unit.target.src">
+    <dirset dir="${runner.target.dir}">
+      <include name="gen"/>
+      <include name="src"/>
+    </dirset>
+    <pathelement path="src"/>
+  </path>
+
+  <path id="runner.test.unit.classpath">
+    <pathelement path="bin" />
+    <fileset dir="libs">
+      <include name="**/*.jar"/>
+    </fileset>
+    <fileset dir="${runner.dir}/libs">
+      <include name="groovy/*.jar" />
+    </fileset>
+    <fileset dir="${runner.dir}/libs">
+      <include name="**/*.jar" />
+    </fileset>
+    <pathelement path="${runner.target.dir}/bin/classes" />
+    <fileset dir="/usr/local/android-sdk">
+      <include name="platforms/android-14/android.jar" />
+      <include name="add-ons/addon-google_apis-google-14/libs/*.jar" />
+    </fileset>
+  </path>
+
+  <taskdef name="groovyc"
+	   classname="org.codehaus.groovy.ant.Groovyc"
+	   classpathref="runner.test.unit.classpath" />
+</project>

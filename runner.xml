@@ -8,15 +8,6 @@
   <property name="runner.script" value="${runner.dir}/start-intent.sh" />
   <property name="runner.activity" value="MainActivity" />
 
-  <taskdef name="groovyc"
-	   classname="org.codehaus.groovy.ant.Groovyc">
-    <classpath>
-      <fileset dir="${runner.dir}">
-	<include name="**/*.jar" />
-      </fileset>
-    </classpath>
-  </taskdef>
-
   <target name="run">
     <xpath input="AndroidManifest.xml"
 	   expression="/manifest/@package" output="manifest.package" />
