@@ -10,16 +10,18 @@ Supporting Android SDK r20 and later on *nix-alike OSes (e.g. Mac OS X 10.6/10.7
 0. INSTALLATION
 -----------------
 
-$ git clone git://github.com/taky/android-runner.git
-$ mv android-runner /usr/local/android-runner
-
+$ mkdir etc
+$ git clone git://github.com/taky/android-runner.git etc/runner
+$ python etc/runner/bootstrap.py . your.package.name
+$ vim runner.properties
+runner.at=etc/runner
+...
 
 1. USAGE (basic)
 -----------------
 
-$ cp /usr/local/android-runner/custom_rules.template.xml custom_rules.xml
 $ vim runner.properties
-runner.at=/usr/local/android-runner
+...
 runner.activity=MainActivity
 ...
 $ ant run
@@ -29,17 +31,7 @@ $ ant run
 2. USAGE (with test project)
 -----------------------------
 
-$ mkdir test
 $ android create test-project -p test/functional -m ../..
-$ vim runner.properties
-runner.at=/usr/local/android-runner
-runner.test.functional=test/functional/
-...
-$ vim custom_rules.xml
-...
- <import file="${runner.dir}/runner.xml" />
- <import file="${runner.dir}/test-functional.xml" />
-</project>
 $ ant test-func-clean
 [Cleans projects, compiles main project and test project, and runs on device or emulator]
 
@@ -47,20 +39,8 @@ $ ant test-func-clean
 3. USAGE (with custom unit test rules, like Robolectric, Groovy, ...)
 -----------------------------------------------------------------------
 
-$ mkdir -p test/unit/{libs,src/path/to/package}
-$ cp /usr/local/android-runner/test-unit-build.template.xml test/unit/build.xml
-$ cp /usr/local/android-runner/test-unit-TestRunner.template.java test/unit/src/path/to/package/TestRunner.java
-$ vim runner.properties
-runner.at=/usr/local/android-runner
-runner.test.unit=test/unit/
-...
-$ vim custom_rules.xml
-...
- <import file="${runner.dir}/runner.xml" />
- <import file="${runner.dir}/test-unit.xml" />
-</project>
-$ vim test/unit/src/path/to/package/TestRunner.java
-package package.to.path;
+$ vim test/unit/src/name/package/your/TestRunner.java
+package your.package.name;
 ...
 $ ant test-unit-clean
 [Cleans projects, runs unit test rules, and possibly runs test cases on JVM]
