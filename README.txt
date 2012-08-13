@@ -55,7 +55,7 @@ $ ant test-func-clean
 3. USAGE (with custom unit test rules, like Robolectric, Groovy, ...)
 -----------------------------------------------------------------------
 
-$ mkdir -p test/unit/src/path/to/package
+$ mkdir -p test/unit/{libs,src/path/to/package}
 $ cp /usr/local/android-runner/test-unit-build.template.xml test/unit/build.xml
 $ cp /usr/local/android-runner/test-unit-TestRunner.template.java test/unit/src/path/to/package/TestRunner.java
 $ vim local.properties
