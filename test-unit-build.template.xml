@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="android-runner-unit">
+  <property name="runner.test.unit.encoding" value="UTF-8" />
+
+  <import file="${runner.dir}/test-unit-bootstrap.xml" />
+
+  <target name="test" depends="compile">
+    <junit dir="${runner.target.dir}" showoutput="yes" fork="true" forkmode="once">
+      <sysproperty key="file.encoding" value="${runner.test.unit.encoding}" />
+      <formatter type="brief" usefile="no" />
+      <classpath refid="runner.test.unit.classpath" />
+      <batchtest>
+	<fileset dir="bin">
+	  <include name="**/*Test*.class"/>
+	  <exclude name="**/*$*.class"/>
+	  <exclude name="**/TestRunner.class"/>
+	</fileset>
+      </batchtest>
+    </junit>
+  </target>
+  <target name="clean">
+    <delete dir="bin" />
+  </target>
+  <target name="compile">
+    <mkdir dir="bin" />
+    <javac destdir="bin">
+      <src refid="runner.test.unit.target.src" />
+      <classpath refid="runner.test.unit.classpath" />
+    </javac>
+    <groovyc destdir="bin">
+      <src refid="runner.test.unit.target.src" />
+      <classpath refid="runner.test.unit.classpath" />
+    </groovyc>
+  </target>
+</project>
