@@ -55,26 +55,9 @@ $ ant test-func-clean
 3. USAGE (with custom unit test rules, like Robolectric, Groovy, ...)
 -----------------------------------------------------------------------
 
-$ mkdir test/unit
-$ vim test/unit/build.xml
-...
- <target name="test" depends="compile">
-   <junit ...>
- </target>
-
- <target name="clean">
-  <delete dir="bin" />
-  ...
- </target>
-
- <target name="compile">
-   <mkdir dir="bin" />
-   <javac srcdir="src" destdir="bin" ... />
-   ...
-   <groovyc srcdir="src" destdir="bin" ... />
-   ...
- </target>
-...
+$ mkdir -p test/unit/src/path/to/package
+$ cp /usr/local/android-runner/test-unit-build.template.xml test/unit/build.xml
+$ cp /usr/local/android-runner/test-unit-TestRunner.template.java test/unit/src/path/to/package/TestRunner.java
 $ vim local.properties
 ...
 runner.dir=/usr/local/android-runner
@@ -88,6 +71,9 @@ $ vim custom_rules.xml
  <import file="${runner.dir}/runner.xml" />
  <import file="${runner.dir}/test-unit.xml" />
 </project>
+$ vim test/unit/src/path/to/package/TestRunner.java
+package package.to.path;
+...
 $ ant test-unit-clean
 [Cleans projects, runs unit test rules, and possibly runs test cases on JVM]
 
