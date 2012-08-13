@@ -1,11 +1,14 @@
 <?xml version="1.0"?>
 <project name="runner">
-  <!-- quick check on runner.dir -->
+  <property file="runner.properties" />
+
+  <!-- quick check on runner.at -->
   <fail
-          message="runner.dir is missing. Make sure to inject it through an env var"
-          unless="runner.dir"
+          message="runner.at is missing. Make sure to inject it through an env var"
+          unless="runner.at"
   />
 
+  <property name="runner.dir" location="${runner.at}" />
   <dirname property="runner.target.dir" file="${ant.file}" />
 
   <import file="${runner.dir}/runner.xml" />

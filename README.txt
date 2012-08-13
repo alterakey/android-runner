@@ -18,12 +18,8 @@ $ mv android-runner /usr/local/android-runner
 -----------------
 
 $ cp /usr/local/android-runner/custom_rules.template.xml custom_rules.xml
-$ vim local.properties
-...
-runner.dir=/usr/local/android-runner
-...
-$ vim project.properties
-...
+$ vim runner.properties
+runner.at=/usr/local/android-runner
 runner.activity=MainActivity
 ...
 $ ant run
@@ -35,12 +31,8 @@ $ ant run
 
 $ mkdir test
 $ android create test-project -p test/functional -m ../..
-$ vim local.properties
-...
-runner.dir=/usr/local/android-runner
-...
-$ vim project.properties
-...
+$ vim runner.properties
+runner.at=/usr/local/android-runner
 runner.test.functional=test/functional/
 ...
 $ vim custom_rules.xml
@@ -58,12 +50,8 @@ $ ant test-func-clean
 $ mkdir -p test/unit/{libs,src/path/to/package}
 $ cp /usr/local/android-runner/test-unit-build.template.xml test/unit/build.xml
 $ cp /usr/local/android-runner/test-unit-TestRunner.template.java test/unit/src/path/to/package/TestRunner.java
-$ vim local.properties
-...
-runner.dir=/usr/local/android-runner
-...
-$ vim project.properties
-...
+$ vim runner.properties
+runner.at=/usr/local/android-runner
 runner.test.unit=test/unit/
 ...
 $ vim custom_rules.xml
