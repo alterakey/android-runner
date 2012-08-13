@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="emulator control">
+  <target name="freeze">
+    <exec executable="killall">
+      <arg line="-STOP emulator-arm" />
+    </exec>
+  </target>
+
+  <target name="thaw">
+    <exec executable="killall">
+      <arg line="-CONT emulator-arm" />
+    </exec>
+  </target>
+
+  <target name="-pre-build" depends="freeze" />
+  <target name="-post-build" depends="thaw" />
+</project>
