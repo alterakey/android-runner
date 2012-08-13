@@ -1,5 +1,6 @@
 import os
 import shutil
+import re
 
 class PackagePath(object):
     def __init__(self, package_name):
@@ -28,6 +29,18 @@ class FileOperation(object):
             shutil.copyfile("%s/%s" % (self.src, srcname), "%s/%s" % (self.dest, destname))
         return self
 
+    def transform(self, pattern, repl, iter):
+        matcher = re.compile(pattern)
+        for name in iter:
+            path = "%s/%s" % (self.dest, name)
+            scratch = "%s.tmp" % path
+            with open(path, "r") as src_file:
+                with open(scratch, "w") as dest_file:
+                    for l in src_file:
+                        dest_file.write(matcher.sub(repl, l))
+            shutil.move(scratch, path)
+        return self
+
 if __name__ == '__main__':
     import sys
 
@@ -51,11 +64,19 @@ if __name__ == '__main__':
         "test-unit-build.template.xml": "test/unit/build.xml",
         "test-unit-TestRunner.template.java": "test/unit/src/%s/TestRunner.java" % package_path
     })
+    FileOperation(src, dest).transform(
+        r'^#runner.at=.*$',
+        'runner.at=%s' % os.path.dirname(sys.argv[0]),
+        ("runner.properties", )
+    )
+    FileOperation(src, dest).transform(
+        r'x\.y\.z', package,
+        ("test/unit/src/%s/TestRunner.java" % package_path, )
+    )
     print """\
 Test environment has been set up for %(package)s!  Next:
-1. Set runner.properties up
-2. Fix package name in test/unit/%(package_path)s/TestRunner.java (i.e. x.y.z -> %(package)s)
-3. 'ant test-unit-clean' to start unit tests
-4. 'ant test-functional-clean' to start functional tests
+1. Check and fix runner.properties
+2. 'ant test-unit-clean' to start unit tests
+3. 'ant test-functional-clean' to start functional tests
    (NB. you need to create a test-project beforehand to do this)
 """ % dict(package=package, package_path=package_path)
