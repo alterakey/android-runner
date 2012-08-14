@@ -7,6 +7,7 @@
   <target name="test" depends="compile">
     <junit dir="${runner.target.dir}" showoutput="yes" fork="true" forkmode="once">
       <sysproperty key="file.encoding" value="${runner.test.unit.encoding}" />
+      <sysproperty key="robolectric.logging" value="stdout" />
       <formatter type="brief" usefile="no" />
       <classpath refid="runner.test.unit.classpath" />
       <batchtest>
