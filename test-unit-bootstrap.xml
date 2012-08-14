@@ -20,7 +20,7 @@
       <include name="**/*.jar" />
     </fileset>
     <pathelement path="${runner.target.dir}/bin/classes" />
-    <fileset dir="/usr/local/android-sdk">
+    <fileset dir="${sdk.dir}">
       <include name="platforms/android-14/android.jar" />
       <include name="add-ons/addon-google_apis-google-14/libs/*.jar" />
     </fileset>
