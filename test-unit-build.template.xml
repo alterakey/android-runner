@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project name="android-runner-unit">
   <property name="runner.test.unit.encoding" value="UTF-8" />
+  <property name="runner.test.unit.java.compilerargs" value="${java.compilerargs}" />
 
   <import file="${runner.dir}/test-unit-bootstrap.xml" />
 
@@ -27,6 +28,7 @@
     <javac destdir="bin">
       <src refid="runner.test.unit.target.src" />
       <classpath refid="runner.test.unit.classpath" />
+      <compilerarg line="${runner.test.unit.java.compilerargs}" />
     </javac>
     <groovyc destdir="bin">
       <src refid="runner.test.unit.target.src" />
