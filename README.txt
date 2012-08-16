@@ -39,9 +39,6 @@ $ ant test-func-clean
 3. USAGE (with custom unit test rules, like Robolectric, Groovy, ...)
 -----------------------------------------------------------------------
 
-$ vim test/unit/src/name/package/your/TestRunner.java
-package your.package.name;
-...
 $ ant test-unit-clean
 [Cleans projects, runs unit test rules, and possibly runs test cases on JVM]
 
