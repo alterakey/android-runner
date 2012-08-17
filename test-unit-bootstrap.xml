@@ -9,19 +9,19 @@
   </path>
 
   <path id="runner.test.unit.classpath">
+    <fileset dir="${runner.dir}/libs">
+      <include name="patches/*.jar" />
+    </fileset>
     <pathelement path="bin" />
     <fileset dir="libs">
       <include name="**/*.jar"/>
     </fileset>
-    <fileset dir="${runner.dir}/libs">
-      <include name="groovy/*.jar" />
-    </fileset>
-    <fileset dir="${runner.dir}/libs">
-      <include name="**/*.jar" />
-    </fileset>
     <pathelement path="${runner.target.dir}/bin/classes" />
     <fileset dir="${runner.target.dir}/libs">
       <include name="**/*.jar"/>
+    </fileset>
+    <fileset dir="${runner.dir}/libs">
+      <include name="**/*.jar" />
     </fileset>
     <fileset dir="${sdk.dir}">
       <include name="platforms/android-14/android.jar" />
