@@ -10,6 +10,7 @@
       <sysproperty key="file.encoding" value="${runner.test.unit.encoding}" />
       <sysproperty key="robolectric.logging" value="stdout" />
       <formatter type="brief" usefile="no" />
+      <jvmarg value="-javaagent:${runner.dir}/libs/patches/powermock-module-junit4-rule-agent.jar" />
       <classpath refid="runner.test.unit.classpath" />
       <batchtest>
 	<fileset dir="bin">
