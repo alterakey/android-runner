@@ -10,7 +10,6 @@ Supporting Android SDK r20 and later on *nix-alike OSes (e.g. Mac OS X 10.6/10.7
 0. INSTALLATION
 -----------------
 
-$ mkdir etc
 $ git clone git://github.com/taky/android-runner.git etc/runner
 $ python etc/runner/bootstrap.py . your.package.name
 $ vim runner.properties
