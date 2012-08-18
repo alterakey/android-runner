@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="android_test_runner_rules" default="run">
+  <target name="test-integ" depends="test-integ-quick" />
+  <target name="test-integ-quick">
+    <subant>
+      <fileset dir="${runner.test.integration}" includes="build.xml" />
+      <target name="debug" />
+      <target name="uninstall" />
+      <target name="install" />
+      <target name="test" />
+    </subant>
+  </target>
+  <target name="test-integ-clean" depends="clean">
+    <subant>
+      <fileset dir="${runner.test.integration}" includes="build.xml" />
+      <target name="clean" />
+      <target name="debug" />
+      <target name="uninstall" />
+      <target name="install" />
+      <target name="test" />
+    </subant>
+  </target>
+</project>
