@@ -77,6 +77,8 @@ if __name__ == '__main__':
 Test environment has been set up for %(package)s!  Next:
 1. Check and fix runner.properties
 2. 'ant test-unit-clean' to start unit tests
-3. 'ant test-functional-clean' to start functional tests
-   (NB. you need to create a test-project beforehand to do this)
+3a. 'ant test-integ-clean' to start integration tests
+3b. 'ant test-func-clean' to start functional tests
+3c. 'ant test-accept-clean' to start acceptance tests
+   (NB. you need to create a test-project beforehand to do these)
 """ % dict(package=package, package_path=package_path)

@@ -30,10 +30,17 @@ $ ant run
 2. USAGE (with test project)
 -----------------------------
 
+$ android create test-project -p test/integration -m ../..
+$ ant test-integ-clean
+[Cleans projects, compiles main project and test project, and runs on device or emulator]
+
 $ android create test-project -p test/functional -m ../..
 $ ant test-func-clean
 [Cleans projects, compiles main project and test project, and runs on device or emulator]
 
+$ android create test-project -p test/acceptance -m ../..
+$ ant test-accept-clean
+[Cleans projects, compiles main project and test project, and runs on device or emulator]
 
 3. USAGE (with custom unit test rules, like Robolectric, Groovy, ...)
 -----------------------------------------------------------------------
