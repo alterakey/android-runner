@@ -12,6 +12,7 @@
   <dirname property="runner.target.dir" file="${ant.file}" />
 
   <import file="${runner.dir}/runner.xml" />
+  <import file="${runner.dir}/lint.xml" />
   <import file="${runner.dir}/test-unit.xml" />
   <import file="${runner.dir}/test-integration.xml" />
   <import file="${runner.dir}/test-functional.xml" />
