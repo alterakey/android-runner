@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project name="runner-setup">
-  <!-- Half-baked pre build setup from Android SDK r20.0.1 and later -->
+  <!-- Half-baked pre build setup from Android SDK r20 -->
   <target name="sdk-build-setup">
     <!-- read the previous build mode -->
     <property file="${out.build.prop.file}" />
@@ -10,11 +10,6 @@
     <property name="build.last.is.instrumented" value="" />
     <property name="build.last.is.packaging.debug" value="" />
     <property name="build.last.is.signing.debug" value="" />
-
-    <path id="android.renderscript.include.path">
-        <pathelement location="${android.platform.tools.dir}/renderscript/include" />
-        <pathelement location="${android.platform.tools.dir}/renderscript/clang-include" />
-    </path>
 
     <echo level="info">Resolving Build Target for ${ant.project.name}...</echo>
     <!-- load project properties, resolve Android target, library dependencies
@@ -85,7 +80,7 @@
       <echo level="info">----------</echo>
       <echo level="info">Handling RenderScript files...</echo>
       <renderscript executable="${renderscript}"
-                    includePathRefId="android.renderscript.include.path"
+                    includePath="${android.renderscript.include.path}"
                     genFolder="${gen.absolute.dir}"
                     resFolder="${out.res.absolute.dir}/raw"
                     targetApi="${project.minSdkVersion}"
