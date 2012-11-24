@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="lint rules" default="run">
+  <property name="lint" value="${sdk.dir}/tools/lint" />
+  <property name="lint.args" value="" />
+
+  <target name="lint">
+    <echo>Running lint...</echo>
+    <exec executable="${lint}" failonerror="true">
+      <arg line="${lint.args} ." />
+    </exec>
+  </target>
+</project>
