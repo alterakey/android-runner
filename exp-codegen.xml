@@ -43,6 +43,7 @@
 	libraryResFolderPathOut="project.library.res.folder.path"
 	libraryBinAidlFolderPathOut="project.library.bin.aidl.folder.path"
 	libraryNativeFolderPathOut="project.library.native.folder.path"
+        libraryRFilePathOut="project.library.bin.r.file.path"
 	jarLibraryPathOut="project.all.jars.path"
 	targetApi="${project.target.apilevel}"
 	verbose="${verbose}" />
@@ -97,6 +98,7 @@
 	    nonConstantId="${android.library}"
 	    libraryResFolderPathRefid="project.library.res.folder.path"
 	    libraryPackagesRefid="project.library.packages"
+            libraryRFileRefid="project.library.bin.r.file.path"
 	    ignoreAssets="${aapt.ignore.assets}"
 	    proguardFile="${out.absolute.dir}/proguard.txt">
 	<res path="${out.res.absolute.dir}" />
