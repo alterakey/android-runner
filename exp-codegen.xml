@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project name="runner-setup">
+  <import file="exp-gettarget.xml" />
+
   <!-- Half-baked pre build setup from Android SDK r20.0.1 and later -->
-  <target name="sdk-build-setup">
+  <target name="sdk-build-setup" depends="setup-target">
     <!-- read the previous build mode -->
     <property file="${out.build.prop.file}" />
     <!-- if empty the props won't be set, meaning it's a new build.
@@ -15,17 +17,6 @@
         <pathelement location="${android.platform.tools.dir}/renderscript/include" />
         <pathelement location="${android.platform.tools.dir}/renderscript/clang-include" />
     </path>
-
-    <echo level="info">Resolving Build Target for ${ant.project.name}...</echo>
-    <!-- load project properties, resolve Android target, library dependencies
-	 and set some properties with the results.
-	 All property names are passed as parameters ending in -Out -->
-    <gettarget
-	androidJarFileOut="project.target.android.jar"
-	androidAidlFileOut="project.target.framework.aidl"
-	bootClassPathOut="project.target.class.path"
-	targetApiOut="project.target.apilevel"
-	minSdkVersionOut="project.minSdkVersion" />
 
     <!-- Value of the hasCode attribute (Application node) extracted from manifest file -->
     <xpath input="${manifest.abs.file}" expression="/manifest/application/@android:hasCode"

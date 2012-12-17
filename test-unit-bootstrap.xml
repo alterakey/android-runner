@@ -23,10 +23,7 @@
     <fileset dir="${runner.dir}/libs">
       <include name="**/*.jar" />
     </fileset>
-    <fileset dir="${sdk.dir}">
-      <include name="platforms/android-14/android.jar" />
-      <include name="add-ons/addon-google_apis-google-14/libs/*.jar" />
-    </fileset>
+    <pathelement path="${project.target.android.jar}" />
   </path>
 
   <taskdef name="groovyc"
