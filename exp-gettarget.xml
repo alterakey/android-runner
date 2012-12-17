@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="runner-target-setup">
+  <path id="android.antlibs">
+    <pathelement path="${sdk.dir}/tools/lib/anttasks.jar" />
+  </path>
+  <taskdef resource="anttasks.properties" classpathref="android.antlibs" />
+  <target name="setup-target">
+    <gettarget
+	androidJarFileOut="project.target.android.jar"
+	androidAidlFileOut="project.target.framework.aidl"
+	bootClassPathOut="project.target.class.path"
+	targetApiOut="project.target.apilevel"
+	minSdkVersionOut="project.minSdkVersion" />
+  </target>
+</project>
