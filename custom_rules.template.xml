@@ -17,4 +17,5 @@
   <import file="${runner.dir}/test-integration.xml" />
   <import file="${runner.dir}/test-functional.xml" />
   <import file="${runner.dir}/test-acceptance.xml" />
+  <import file="${runner.dir}/quick-clean.xml" />
 </project>
