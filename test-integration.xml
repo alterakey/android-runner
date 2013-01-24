@@ -10,7 +10,7 @@
       <target name="test" />
     </subant>
   </target>
-  <target name="test-integ-clean" depends="clean">
+  <target name="test-integ-clean" depends="clean-quick">
     <subant>
       <fileset dir="${runner.test.integration}" includes="build.xml" />
       <target name="clean" />

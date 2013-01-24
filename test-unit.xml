@@ -2,6 +2,7 @@
 <project name="android_test_runner_rules" default="test-unit">
   <import file="exp-codegen.xml" />
   <import file="exp-gettarget.xml" />
+  <import file="quick-clean.xml" />
   <target name="-test-unit-code-gen" depends="regenerate" />
 
   <target name="test-unit" depends="test-unit-normal" />
@@ -18,5 +19,5 @@
       <target name="test" />
     </subant>
   </target>
-  <target name="test-unit-clean" depends="clean, -test-unit-code-gen, test-unit-normal" />
+  <target name="test-unit-clean" depends="clean-quick, -test-unit-code-gen, test-unit-normal" />
 </project>
