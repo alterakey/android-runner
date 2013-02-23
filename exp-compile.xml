@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="runner-setup">
+  <target name="compile" depends="-set-debug-files, -set-debug-mode, -debug-obfuscation-check, -compile" />
+</project>
